@@ -1,0 +1,51 @@
+<section class="container">
+  <h2>Listado de productos</h2>
+  <div class="boton-flotante">
+    <a [routerLink]="['/producto', 0]">
+      <button mat-fab color="primary">
+        <mat-icon>add</mat-icon>
+      </button>
+    </a>
+  </div>
+  <div class="row">
+    @for(producto of productos; track producto.nombre) {
+    <div class="col-md-3">
+      <mat-card class="example-card" appearance="outlined">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>{{producto.codigo}} - {{producto.nombre}}</mat-card-title>
+          <mat-card-subtitle>
+            <h2>
+             $ {{producto.precio}}.-
+            </h2>
+          </mat-card-subtitle>
+        </mat-card-header>
+        <img
+          mat-card-image
+          src="https://material.angular.dev/assets/img/examples/shiba2.jpg"
+          alt="Photo of a Shiba Inu"
+        />
+        <mat-card-content>
+          <mat-icon aria-hidden="false" aria-label="Example home icon">
+            shopping_cart
+          </mat-icon>
+          |
+          <mat-icon aria-hidden="false" aria-label="Example home icon">
+            star
+          </mat-icon>
+          |
+          <mat-icon aria-hidden="false" aria-label="Example home icon">
+            favorite
+          </mat-icon>
+          <p>
+            {{producto.descripcion}}
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button matButton="filled">Editar</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    }
+  </div>
+</section>

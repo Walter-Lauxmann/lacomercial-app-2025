@@ -1,0 +1,17 @@
+.example-card {
+  max-width: 400px;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.dev/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+.boton-flotante {
+  position: fixed;
+  display: flex;
+  justify-content: flex-end;
+  z-index: 999999;
+  width: 80%;
+  margin-top: -50px;
+}
