@@ -1,0 +1,11 @@
+
+.grupo-botones {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+@media (min-width: 768px) {
+  .grupo-botones {
+    flex-direction: row;
+  }
+}

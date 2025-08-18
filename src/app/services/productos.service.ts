@@ -13,43 +13,45 @@ export class ProductosService {
     codigo : '',
     nombre : '',
     descripcion : '',
-    precio : 0,
+    precio_costo : 0,
+    precio_venta : 0,
     stock : 0,
+    estado : 'disponible',
     imagen : '',
-    proveedores_id : 0,
-    rubros_id : 0
+    proveedores_id : 1,
+    rubros_id : 1
   }
 
-  url = 'http://localhost:3000/api';
+  url = 'http://localhost:3000/api/productos';
 
   constructor(private http: HttpClient) { }
 
   getProductos(): Observable<Productos[]> {
-    return this.http.get<Productos[]>(`${this.url}/productos`);
+    return this.http.get<Productos[]>(`${this.url}`);
   }
 
   getProducto(id: any): Observable<Productos[]> {
-    return this.http.get<Productos[]>(`${this.url}/productos/${id}`);
+    return this.http.get<Productos[]>(`${this.url}/${id}`);
   }
 
-  guardarProducto(id: any, datos: Productos) {
+  guardarProducto(id: any, datos: any, archivo?: File, ): Observable<any> {
+    console.log(datos);
+    const formData = new FormData();
+    Object.keys(datos).forEach(key => {
+      formData.append(key, datos[key]);
+    });
+    if (archivo) {
+      formData.append('archivo', archivo);
+    }
     if(id > 0) {
-      this.http.put(`${this.url}/productos/${id}`, datos)
-      .subscribe(
-        res => {console.log(res)},
-        err => {console.error('Ocurrió un error')}
-      )
+      return this.http.put(`${this.url}/${id}`, formData);
     } else {
-      this.http.post(`${this.url}/productos`, datos)
-      .subscribe(
-        res => {console.log(res)},
-        err => {console.error('Ocurrió un error')}
-      )
+      return this.http.post(`${this.url}`, formData);
     }
   }
 
   eliminarProducto(id: any) {
-    this.http.delete(`${this.url}/productos/${id}`)
+    this.http.delete(`${this.url}/${id}`)
     .subscribe(
         res => {console.log(res)},
         err => {console.error('Ocurrió un error')}

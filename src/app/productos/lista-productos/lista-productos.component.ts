@@ -1,17 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductosService } from '../../services/productos.service';
-import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
+import { ProductosService } from '../../services/productos.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-lista-productos',
   imports: [
+    CommonModule,
     RouterLink,
     MatButtonModule,
-    MatIconModule,
-    MatCardModule
+    MatCardModule,
+    MatIconModule
   ],
   templateUrl: './lista-productos.component.html',
   styleUrl: './lista-productos.component.scss'
@@ -19,14 +21,13 @@ import { MatCardModule } from '@angular/material/card';
 export class ListaProductosComponent implements OnInit {
   productos: any;
 
-  constructor(private productoService:ProductosService) {}
+  constructor(private productosService: ProductosService) {}
 
   ngOnInit(): void {
-      this.productoService.getProductos()
-      .subscribe(
-        (res:any) => {this.productos = res;},
-        (error) => {console.error(error); }
-      );
+    this.productosService.getProductos()
+    .subscribe(
+      (res: any) => { this.productos = res; },
+      (error) => { console.error(error); }
+    );
   }
-
 }
