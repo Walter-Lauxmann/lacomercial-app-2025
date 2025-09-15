@@ -8,7 +8,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-navegacion',
@@ -27,6 +28,17 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 })
 export class NavegacionComponent {
   private breakpointObserver = inject(BreakpointObserver);
+
+  usuario: string | null = null;
+
+  constructor(private auth: AuthService, private router: Router) {
+    this.usuario = this.auth.getUsuario();
+  }
+
+  logout() {
+    this.auth.logout();
+    this.router.navigate(['/login']);
+  }
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(

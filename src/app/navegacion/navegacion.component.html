@@ -24,6 +24,30 @@
       }
       <h2><a routerLink="/">La Comercial</a></h2>
     </mat-toolbar>
+    <header class="bg-indigo-600 text-white shadow-md">
+      <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+        <h1 class="text-xl font-bold">📦 Gestión de Productos</h1>
+
+        <div class="flex items-center gap-4">
+          @if (usuario) {
+          <span class="text-sm">
+            Hola, <strong>{{ usuario }}</strong>
+          </span>
+          <button (click)="logout()" class="bg-red-500 hover:bg-red-600 px-3 py-1 rounded-lg text-sm">
+            Cerrar sesión
+          </button>
+          } @else {
+          <a [routerLink]="['/login']" routerLinkActive="router-link-active"  class="bg-red-500 hover:bg-red-600 px-3 py-1 rounded-lg text-sm">
+            Login
+          </a>
+          <a [routerLink]="['/registro']" class="bg-red-500 hover:bg-red-600 px-3 py-1 rounded-lg text-sm">
+            Registrarse
+          </a>
+          }
+
+        </div>
+      </div>
+    </header>
     <!-- Add Content Here -->
     <router-outlet />
   </mat-sidenav-content>
